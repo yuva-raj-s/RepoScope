@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { GitBranch, Code2, Brain, Sparkles } from "lucide-react";
+import { GitBranch, Code2, Brain, Sparkles, Zap } from "lucide-react";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
@@ -64,16 +64,16 @@ export default function Home() {
 
       <main className="px-4 py-8">
         {!analysis && !progress && (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto animate-fade-in">
             <section className="text-center py-12 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
                 <Sparkles className="h-3.5 w-3.5" />
                 AI-Powered Analysis
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-slide-up">
                 Understand any GitHub repo
-                <span className="block text-primary">in seconds</span>
+                <span className="block text-primary animate-slide-up" style={{ animationDelay: "0.1s" }}>in seconds</span>
               </h1>
               
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -91,7 +91,7 @@ export default function Home() {
 
             <section className="py-12">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate">
+                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate transition-all animate-scale-in" style={{ animationDelay: "0.1s" }}>
                   <div className="p-2 rounded-lg bg-chart-1/10 w-fit mb-4">
                     <GitBranch className="h-5 w-5 text-chart-1" />
                   </div>
@@ -101,7 +101,7 @@ export default function Home() {
                   </p>
                 </div>
                 
-                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate">
+                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate transition-all animate-scale-in" style={{ animationDelay: "0.2s" }}>
                   <div className="p-2 rounded-lg bg-chart-2/10 w-fit mb-4">
                     <Brain className="h-5 w-5 text-chart-2" />
                   </div>
@@ -111,7 +111,7 @@ export default function Home() {
                   </p>
                 </div>
                 
-                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate">
+                <div className="p-6 rounded-xl bg-card border border-card-border hover-elevate transition-all animate-scale-in" style={{ animationDelay: "0.3s" }}>
                   <div className="p-2 rounded-lg bg-chart-3/10 w-fit mb-4">
                     <Code2 className="h-5 w-5 text-chart-3" />
                   </div>
@@ -132,8 +132,8 @@ export default function Home() {
         )}
 
         {analysis && (
-          <div className="py-6">
-            <div className="max-w-6xl mx-auto mb-6">
+          <div className="py-6 animate-fade-in">
+            <div className="max-w-6xl mx-auto mb-6 animate-slide-up">
               <RepositoryInput 
                 onSubmit={handleAnalyze} 
                 isLoading={analyzeMutation.isPending} 

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { 
   Star, 
   GitFork, 
@@ -16,10 +17,13 @@ import {
   Lightbulb,
   Layers,
   Target,
-  Zap
+  Zap,
+  Copy
 } from "lucide-react";
 import { FileTree } from "./file-tree";
 import { TechnologyBadges } from "./technology-badges";
+import { AnalysisActions } from "./analysis-actions";
+import { useToast } from "@/hooks/use-toast";
 import type { RepositoryAnalysis } from "@shared/schema";
 
 interface AnalysisResultsProps {
@@ -47,21 +51,57 @@ function formatNumber(num: number): string {
 
 export function AnalysisResults({ analysis }: AnalysisResultsProps) {
   const { metadata, fileTree, readme, aiAnalysis } = analysis;
+  const { toast } = useToast();
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const handleCopy = async (text: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(label);
+      toast({
+        title: "Copied!",
+        description: `${label} copied to clipboard`,
+      });
+      setTimeout(() => setCopiedText(null), 2000);
+    } catch {
+      toast({
+        title: "Failed to copy",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6" data-testid="analysis-results">
+    <div className="w-full max-w-6xl mx-auto space-y-6 animate-slide-up" data-testid="analysis-results">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-6">
-          <Card className="border-card-border">
+          <Card className="border-card-border hover-elevate transition-all">
+            <div className="flex items-center justify-between mb-2">
+              <span></span>
+              <AnalysisActions analysis={analysis} />
+            </div>
             <CardHeader className="pb-3">
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-2 w-full">
                 <div className="min-w-0 flex-1">
                   <CardTitle className="text-xl font-bold truncate" data-testid="text-repo-name">
                     {metadata.name}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground font-mono truncate" data-testid="text-repo-fullname">
-                    {metadata.fullName}
-                  </p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <p className="text-sm text-muted-foreground font-mono truncate cursor-pointer hover-elevate px-2 py-1 rounded" 
+                       onClick={() => handleCopy(metadata.fullName, "Repository name")}
+                       data-testid="text-repo-fullname">
+                      {metadata.fullName}
+                    </p>
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="h-6 w-6 p-0"
+                      onClick={() => handleCopy(metadata.fullName, "Repository name")}
+                      data-testid="button-copy-name"
+                    >
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                  </div>
                 </div>
                 <a
                   href={metadata.url}
