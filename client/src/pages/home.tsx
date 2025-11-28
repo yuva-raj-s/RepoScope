@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { GitBranch, Code2, Brain, Sparkles, Zap, Cpu, GitFork, Layers3, Database, Gauge, Settings } from "lucide-react";
+import { Code2, Brain, Sparkles, Cpu, GitFork, Layers3, Database, Gauge } from "lucide-react";
 import { Welcome } from "./welcome";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { AppHeader } from "@/components/app-header";
 import { ApiSetupModal } from "@/components/api-setup-modal";
 import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
@@ -50,6 +50,11 @@ export default function Home() {
 
   const handleGetStarted = () => {
     setShowApiModal(true);
+  };
+
+  const handleLogoClick = () => {
+    setAnalysis(null);
+    setProgress(null);
   };
 
   const analyzeMutation = useMutation({
@@ -106,6 +111,11 @@ export default function Home() {
   if (!apiConfig) {
     return (
       <>
+        <AppHeader
+          onLogoClick={handleLogoClick}
+          onApiSettings={() => setShowApiModal(true)}
+          currentView="home"
+        />
         <Welcome onGetStarted={handleGetStarted} />
         <ApiSetupModal 
           open={showApiModal}
@@ -118,29 +128,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background gradient-light-bulb">
-      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-primary/10">
-              <Code2 className="h-5 w-5 text-primary" />
-            </div>
-            <span className="font-semibold text-lg">RepoScope</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setShowApiModal(true)}
-              className="gap-2"
-              data-testid="button-api-settings"
-            >
-              <Settings className="h-4 w-4" />
-              {apiConfig ? `${apiConfig.provider}` : "Setup API"}
-            </Button>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <AppHeader
+        onLogoClick={handleLogoClick}
+        onApiSettings={() => setShowApiModal(true)}
+        apiProvider={apiConfig?.provider}
+        currentView={
+          progress?.stage === "error" || progress?.stage === "complete" ? "results" :
+          progress ? "analyzing" : 
+          analysis ? "results" : "input"
+        }
+      />
 
       <ApiSetupModal 
         open={showApiModal}
@@ -148,10 +145,10 @@ export default function Home() {
         onSave={handleSaveApi}
       />
 
-      <main className="px-4 py-8 relative z-10">
+      <main className="px-4 py-6 relative z-10">
         {!analysis && !progress && (
           <div className="max-w-4xl mx-auto animate-fade-in">
-            <section className="text-center py-12 space-y-6 gradient-hero rounded-2xl px-4 py-12 md:px-8 md:py-16">
+            <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="h-px w-8 accent-line"></div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium code-badge">
@@ -188,7 +185,7 @@ export default function Home() {
               </div>
             </section>
 
-            <section className="py-16">
+            <section className="py-12">
               <h2 className="text-2xl font-bold text-center mb-2">Powerful Features</h2>
               <div className="h-px max-w-xs mx-auto mb-12 accent-line"></div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
