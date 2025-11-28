@@ -8,8 +8,9 @@ import {
   getFileContents,
   extractKeyFiles
 } from "./github";
-import { analyzeRepository } from "./gemini";
+import { analyzeRepository, generateFallbackAnalysis } from "./ai-providers";
 import { repositoryAnalysisRequestSchema } from "@shared/schema";
+import { analyzeRequestSchema } from "@shared/api-schema";
 import type { RepositoryAnalysis } from "@shared/schema";
 
 export async function registerRoutes(
@@ -19,7 +20,7 @@ export async function registerRoutes(
   
   app.post("/api/analyze", async (req, res) => {
     try {
-      const parseResult = repositoryAnalysisRequestSchema.safeParse(req.body);
+      const parseResult = analyzeRequestSchema.safeParse(req.body);
       
       if (!parseResult.success) {
         return res.status(400).json({ 
@@ -27,7 +28,7 @@ export async function registerRoutes(
         });
       }
 
-      const { url } = parseResult.data;
+      const { url, apiProvider, apiKey } = parseResult.data;
       const parsed = parseGitHubUrl(url);
       
       if (!parsed) {
@@ -49,15 +50,29 @@ export async function registerRoutes(
       const keyFilePaths = extractKeyFiles(fileTree);
       const keyFileContents = await getFileContents(owner, repo, keyFilePaths);
 
-      const aiAnalysis = await analyzeRepository({
-        repoName: metadata.fullName,
-        description: metadata.description,
-        language: metadata.language,
-        topics: metadata.topics,
-        readme,
-        fileTree,
-        keyFileContents,
-      });
+      let aiAnalysis;
+      try {
+        aiAnalysis = await analyzeRepository({
+          repoName: metadata.fullName,
+          description: metadata.description,
+          language: metadata.language,
+          topics: metadata.topics,
+          readme,
+          fileTree,
+          keyFileContents,
+        }, apiProvider, apiKey);
+      } catch (error) {
+        console.error("AI analysis failed, using fallback:", error);
+        aiAnalysis = generateFallbackAnalysis({
+          repoName: metadata.fullName,
+          description: metadata.description,
+          language: metadata.language,
+          topics: metadata.topics,
+          readme,
+          fileTree,
+          keyFileContents,
+        });
+      }
 
       const analysis: RepositoryAnalysis = {
         metadata,

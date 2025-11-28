@@ -1,25 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { GitBranch, Code2, Brain, Sparkles, Zap, Cpu, GitFork, Layers3, Database, Gauge } from "lucide-react";
+import { GitBranch, Code2, Brain, Sparkles, Zap, Cpu, GitFork, Layers3, Database, Gauge, Settings } from "lucide-react";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ApiSetupModal } from "@/components/api-setup-modal";
+import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import type { RepositoryAnalysis, AnalysisProgress as AnalysisProgressType } from "@shared/schema";
+import type { ApiProvider } from "@shared/api-schema";
+
+interface ApiConfig {
+  provider: ApiProvider;
+  apiKey: string;
+}
 
 export default function Home() {
   const { toast } = useToast();
   const [analysis, setAnalysis] = useState<RepositoryAnalysis | null>(null);
   const [progress, setProgress] = useState<AnalysisProgressType | null>(null);
+  const [apiConfig, setApiConfig] = useState<ApiConfig | null>(null);
+  const [showApiModal, setShowApiModal] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("repoScope_apiConfig");
+    if (stored) {
+      try {
+        setApiConfig(JSON.parse(stored));
+      } catch {
+        localStorage.removeItem("repoScope_apiConfig");
+        setShowApiModal(true);
+      }
+    } else {
+      setShowApiModal(true);
+    }
+  }, []);
+
+  const handleSaveApi = (provider: ApiProvider, apiKey: string) => {
+    const config = { provider, apiKey };
+    setApiConfig(config);
+    localStorage.setItem("repoScope_apiConfig", JSON.stringify(config));
+    setShowApiModal(false);
+    toast({
+      title: "Success!",
+      description: `${provider.charAt(0).toUpperCase() + provider.slice(1)} API key configured`,
+    });
+  };
 
   const analyzeMutation = useMutation({
     mutationFn: async (url: string) => {
+      if (!apiConfig) {
+        throw new Error("API configuration required");
+      }
       setAnalysis(null);
       setProgress({ stage: "fetching", message: "Connecting to GitHub...", progress: 10 });
       
-      const response = await apiRequest("POST", "/api/analyze", { url });
+      const response = await apiRequest("POST", "/api/analyze", { 
+        url,
+        apiProvider: apiConfig.provider,
+        apiKey: apiConfig.apiKey,
+      });
       const data = await response.json();
       return data as RepositoryAnalysis;
     },
@@ -58,9 +100,27 @@ export default function Home() {
             </div>
             <span className="font-semibold text-lg">RepoScope</span>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setShowApiModal(true)}
+              className="gap-2"
+              data-testid="button-api-settings"
+            >
+              <Settings className="h-4 w-4" />
+              {apiConfig ? `${apiConfig.provider}` : "Setup API"}
+            </Button>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
+
+      <ApiSetupModal 
+        open={showApiModal}
+        onOpenChange={setShowApiModal}
+        onSave={handleSaveApi}
+      />
 
       <main className="px-4 py-8 relative z-10">
         {!analysis && !progress && (
@@ -86,10 +146,19 @@ export default function Home() {
               </p>
 
               <div className="pt-4">
-                <RepositoryInput 
-                  onSubmit={handleAnalyze} 
-                  isLoading={analyzeMutation.isPending} 
-                />
+                {apiConfig ? (
+                  <RepositoryInput 
+                    onSubmit={handleAnalyze} 
+                    isLoading={analyzeMutation.isPending} 
+                  />
+                ) : (
+                  <div className="text-center text-muted-foreground">
+                    <p className="mb-4">Please configure your API key to get started</p>
+                    <Button onClick={() => setShowApiModal(true)}>
+                      Configure API
+                    </Button>
+                  </div>
+                )}
               </div>
             </section>
 
