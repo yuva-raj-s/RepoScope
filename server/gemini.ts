@@ -103,12 +103,25 @@ Be thorough but concise. Focus on what makes this repository unique and useful.`
       contents: prompt,
     });
 
-    const content = response.text;
+    let content = response.text;
+    
+    if (!content && response.candidates && response.candidates[0]?.content?.parts) {
+      const textPart = response.candidates[0].content.parts.find((p: any) => p.text);
+      content = textPart?.text || null;
+    }
+    
     if (!content) {
+      console.error("No content in Gemini response:", JSON.stringify(response, null, 2));
       throw new Error("No response from AI");
     }
 
-    const result = JSON.parse(content);
+    let result: any;
+    try {
+      result = JSON.parse(content);
+    } catch (parseError) {
+      console.error("Failed to parse Gemini JSON response:", content);
+      throw new Error("Invalid JSON response from AI");
+    }
     
     const technologies: TechnologyInfo[] = (result.technologies || []).map((tech: any) => ({
       name: tech.name,
