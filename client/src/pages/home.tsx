@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Code2, Brain, Sparkles, Cpu, GitFork, Layers3, Database, Gauge, Settings } from "lucide-react";
+import { Code2, Brain, Sparkles, Cpu, GitFork, Layers3, Database, Gauge } from "lucide-react";
 import { Welcome } from "./welcome";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
@@ -53,11 +53,6 @@ export default function Home() {
   };
 
   const handleLogoClick = () => {
-    setAnalysis(null);
-    setProgress(null);
-  };
-
-  const handleNewAnalysis = () => {
     setAnalysis(null);
     setProgress(null);
   };
@@ -118,7 +113,6 @@ export default function Home() {
       <>
         <AppHeader
           onLogoClick={handleLogoClick}
-          onNewAnalysis={handleNewAnalysis}
           onApiSettings={() => setShowApiModal(true)}
           currentView="home"
         />
@@ -136,7 +130,6 @@ export default function Home() {
     <div className="min-h-screen bg-background gradient-light-bulb">
       <AppHeader
         onLogoClick={handleLogoClick}
-        onNewAnalysis={handleNewAnalysis}
         onApiSettings={() => setShowApiModal(true)}
         apiProvider={apiConfig?.provider}
         currentView={

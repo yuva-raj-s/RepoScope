@@ -1,10 +1,9 @@
-import { Code2, Settings, Plus } from "lucide-react";
+import { Code2, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 interface AppHeaderProps {
   onLogoClick: () => void;
-  onNewAnalysis: () => void;
   onApiSettings: () => void;
   apiProvider?: string;
   currentView?: "home" | "input" | "analyzing" | "results";
@@ -12,7 +11,6 @@ interface AppHeaderProps {
 
 export function AppHeader({
   onLogoClick,
-  onNewAnalysis,
   onApiSettings,
   apiProvider,
   currentView = "home",
@@ -54,19 +52,6 @@ export function AppHeader({
 
         {/* Right Section */}
         <div className="flex items-center gap-2 ml-auto">
-          {(currentView === "results" || currentView === "analyzing") && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={onNewAnalysis}
-              className="gap-2"
-              data-testid="button-new-analysis"
-            >
-              <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">New Analysis</span>
-            </Button>
-          )}
-          
           <Button
             size="sm"
             variant="outline"
