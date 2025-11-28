@@ -103,11 +103,11 @@ Be thorough but concise. Focus on what makes this repository unique and useful.`
       contents: prompt,
     });
 
-    let content = response.text;
+    let content: string | undefined = response.text;
     
     if (!content && response.candidates && response.candidates[0]?.content?.parts) {
       const textPart = response.candidates[0].content.parts.find((p: any) => p.text);
-      content = textPart?.text || null;
+      content = textPart?.text || undefined;
     }
     
     if (!content) {

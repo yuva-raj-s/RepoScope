@@ -101,9 +101,10 @@ Preferred communication style: Simple, everyday language.
 
 ### AI Services
 - **Google Gemini API**: Core AI analysis engine using `@google/genai` SDK
-  - Models: gemini-2.5-flash or gemini-2.5-pro
+  - Model: gemini-2.5-flash (primary)
   - Used for repository content analysis and technology detection
-  - Requires API key configuration
+  - Requires GEMINI_API_KEY secret
+  - Falls back to basic pattern-based analysis if API unavailable
 
 ### Third-Party APIs
 - **GitHub REST API v3**: Repository data fetching
