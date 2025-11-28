@@ -1,17 +1,21 @@
-import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 import type { AIAnalysis, FileNode, TechnologyInfo } from "@shared/schema";
 
-// the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-let openaiClient: OpenAI | null = null;
+// DON'T DELETE THIS COMMENT
+// Follow these instructions when using this blueprint:
+// - Note that the newest Gemini model series is "gemini-2.5-flash" or "gemini-2.5-pro"
+//   - do not change this unless explicitly requested by the user
 
-function getOpenAI(): OpenAI {
-  if (!process.env.OPENAI_API_KEY) {
-    throw new Error("OpenAI API key not configured. Please add your OPENAI_API_KEY to use AI analysis.");
+let geminiClient: GoogleGenAI | null = null;
+
+function getGemini(): GoogleGenAI {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error("Gemini API key not configured. Please add your GEMINI_API_KEY to use AI analysis.");
   }
-  if (!openaiClient) {
-    openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  if (!geminiClient) {
+    geminiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
-  return openaiClient;
+  return geminiClient;
 }
 
 interface AnalysisInput {
@@ -88,24 +92,18 @@ Categories for technologies:
 Be thorough but concise. Focus on what makes this repository unique and useful.`;
 
   try {
-    const openai = getOpenAI();
-    const response = await openai.chat.completions.create({
-      model: "gpt-5",
-      messages: [
-        {
-          role: "system",
-          content: "You are an expert software engineer analyzing GitHub repositories. Provide accurate, insightful analysis in JSON format. Always respond with valid JSON only.",
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      response_format: { type: "json_object" },
-      max_completion_tokens: 2048,
+    const ai = getGemini();
+    
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      config: {
+        systemInstruction: "You are an expert software engineer analyzing GitHub repositories. Provide accurate, insightful analysis in JSON format. Always respond with valid JSON only.",
+        responseMimeType: "application/json",
+      },
+      contents: prompt,
     });
 
-    const content = response.choices[0].message.content;
+    const content = response.text;
     if (!content) {
       throw new Error("No response from AI");
     }
@@ -129,7 +127,7 @@ Be thorough but concise. Focus on what makes this repository unique and useful.`
       insights: Array.isArray(result.insights) ? result.insights.slice(0, 5) : [],
     };
   } catch (error) {
-    console.error("OpenAI analysis error:", error);
+    console.error("Gemini analysis error:", error);
     return generateFallbackAnalysis(input);
   }
 }

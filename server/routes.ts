@@ -8,7 +8,7 @@ import {
   getFileContents,
   extractKeyFiles
 } from "./github";
-import { analyzeRepository } from "./openai";
+import { analyzeRepository } from "./gemini";
 import { repositoryAnalysisRequestSchema } from "@shared/schema";
 import type { RepositoryAnalysis } from "@shared/schema";
 
