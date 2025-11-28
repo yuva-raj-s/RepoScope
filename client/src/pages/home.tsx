@@ -49,8 +49,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className="min-h-screen bg-background gradient-light-bulb">
+      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-10">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-primary/10">
@@ -62,10 +62,10 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="px-4 py-8">
+      <main className="px-4 py-8 relative z-10">
         {!analysis && !progress && (
           <div className="max-w-4xl mx-auto animate-fade-in">
-            <section className="text-center py-12 space-y-6">
+            <section className="text-center py-12 space-y-6 gradient-hero rounded-2xl px-4 py-12 md:px-8 md:py-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
                 <Sparkles className="h-3.5 w-3.5" />
                 AI-Powered Analysis
