@@ -307,14 +307,14 @@
     height: 1000px;
     background: radial-gradient(
       ellipse at center,
-      hsl(217 91% 35% / 0.25) 0%,
-      hsl(262 83% 40% / 0.12) 25%,
-      hsl(142 76% 28% / 0.05) 50%,
+      hsl(217 91% 35% / 0.3) 0%,
+      hsl(262 83% 40% / 0.15) 25%,
+      hsl(142 76% 28% / 0.06) 50%,
       transparent 80%
     );
     pointer-events: none;
     z-index: 1;
-    animation: float 8s ease-in-out infinite;
+    animation: float 12s ease-in-out infinite;
   }
 
   .dark .gradient-light-bulb::before {
@@ -327,14 +327,50 @@
     height: 1000px;
     background: radial-gradient(
       ellipse at center,
-      hsl(217 91% 45% / 0.2) 0%,
-      hsl(262 83% 60% / 0.1) 25%,
-      hsl(142 76% 60% / 0.04) 50%,
+      hsl(217 91% 45% / 0.25) 0%,
+      hsl(262 83% 60% / 0.13) 25%,
+      hsl(142 76% 60% / 0.05) 50%,
       transparent 80%
     );
     pointer-events: none;
     z-index: 1;
-    animation: float 8s ease-in-out infinite;
+    animation: float 12s ease-in-out infinite;
+  }
+
+  :root .gradient-light-bulb::after {
+    content: "";
+    position: fixed;
+    top: -30%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(
+      ellipse at center,
+      hsl(262 83% 40% / 0.15) 0%,
+      hsl(340 82% 42% / 0.08) 30%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    animation: float 18s ease-in-out infinite reverse;
+  }
+
+  .dark .gradient-light-bulb::after {
+    content: "";
+    position: fixed;
+    top: -30%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(
+      ellipse at center,
+      hsl(262 83% 60% / 0.12) 0%,
+      hsl(340 82% 65% / 0.06) 30%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    animation: float 18s ease-in-out infinite reverse;
   }
 
   @keyframes float {
@@ -342,31 +378,70 @@
       transform: translateX(-50%) translateY(0px);
       opacity: 0.85;
     }
+    25% {
+      transform: translateX(-45%) translateY(20px);
+      opacity: 0.7;
+    }
     50% {
-      transform: translateX(-50%) translateY(30px);
+      transform: translateX(-50%) translateY(40px);
       opacity: 0.65;
+    }
+    75% {
+      transform: translateX(-55%) translateY(20px);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes gradientRotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes pulseGradient {
+    0%, 100% {
+      opacity: 0.08;
+      filter: blur(0px);
+    }
+    50% {
+      opacity: 0.15;
+      filter: blur(2px);
     }
   }
 
   .gradient-hero {
     background: linear-gradient(
-      135deg,
+      -45deg,
       hsl(var(--primary) / 0.08) 0%,
-      hsl(262 83% 40% / 0.04) 50%,
-      transparent 100%
+      hsl(262 83% 40% / 0.04) 25%,
+      hsl(142 76% 28% / 0.02) 50%,
+      hsl(262 83% 40% / 0.04) 75%,
+      hsl(var(--primary) / 0.08) 100%
     );
+    background-size: 400% 400%;
     position: relative;
     border: 1px solid hsl(var(--primary) / 0.1);
+    animation: gradientRotate 15s ease infinite;
   }
 
   .dark .gradient-hero {
     background: linear-gradient(
-      135deg,
+      -45deg,
       hsl(var(--primary) / 0.12) 0%,
-      hsl(262 83% 60% / 0.06) 50%,
-      transparent 100%
+      hsl(262 83% 60% / 0.06) 25%,
+      hsl(142 76% 60% / 0.03) 50%,
+      hsl(262 83% 60% / 0.06) 75%,
+      hsl(var(--primary) / 0.12) 100%
     );
+    background-size: 400% 400%;
     border: 1px solid hsl(var(--primary) / 0.15);
+    animation: gradientRotate 15s ease infinite;
   }
 
   .glow-card {
@@ -422,23 +497,40 @@
     filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.6));
   }
 
+  @keyframes accentShine {
+    0%, 100% {
+      opacity: 0.4;
+      filter: blur(0px);
+    }
+    50% {
+      opacity: 0.8;
+      filter: blur(1px);
+    }
+  }
+
   .accent-line {
     height: 2px;
     background: linear-gradient(
       90deg,
-      hsl(var(--primary) / 0.5) 0%,
+      transparent 0%,
+      hsl(var(--primary) / 0.5) 25%,
       hsl(262 83% 40% / 0.3) 50%,
+      hsl(var(--primary) / 0.5) 75%,
       transparent 100%
     );
+    animation: accentShine 4s ease-in-out infinite;
   }
 
   .dark .accent-line {
     background: linear-gradient(
       90deg,
-      hsl(var(--primary) / 0.6) 0%,
+      transparent 0%,
+      hsl(var(--primary) / 0.6) 25%,
       hsl(262 83% 60% / 0.4) 50%,
+      hsl(var(--primary) / 0.6) 75%,
       transparent 100%
     );
+    animation: accentShine 4s ease-in-out infinite;
   }
 
   /**
