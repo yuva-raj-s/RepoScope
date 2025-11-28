@@ -53,23 +53,6 @@ export default function Home() {
     setShowApiModal(true);
   };
 
-  if (isLoading) {
-    return null;
-  }
-
-  if (!apiConfig) {
-    return (
-      <>
-        <Welcome onGetStarted={handleGetStarted} />
-        <ApiSetupModal 
-          open={showApiModal}
-          onOpenChange={setShowApiModal}
-          onSave={handleSaveApi}
-        />
-      </>
-    );
-  }
-
   const analyzeMutation = useMutation({
     mutationFn: async (url: string) => {
       if (!apiConfig) {
@@ -110,6 +93,23 @@ export default function Home() {
   const handleAnalyze = (url: string) => {
     analyzeMutation.mutate(url);
   };
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!apiConfig) {
+    return (
+      <>
+        <Welcome onGetStarted={handleGetStarted} />
+        <ApiSetupModal 
+          open={showApiModal}
+          onOpenChange={setShowApiModal}
+          onSave={handleSaveApi}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background gradient-light-bulb">
