@@ -39,42 +39,116 @@ function getAnalysisPrompt(input: AnalysisInput): string {
     })
     .join("\n\n");
 
-  return `Analyze this GitHub repository and provide a comprehensive summary.
+  return `# Professional GitHub Repository Analysis
 
-Repository: ${input.repoName}
-Primary Language: ${input.language || "Unknown"}
-Topics: ${input.topics.join(", ") || "None"}
-Description: ${input.description || "No description provided"}
+You are an expert software engineer and technical architect. Analyze this GitHub repository with professional depth and provide a comprehensive technical assessment.
 
-File Structure (first 100 files):
+## Repository Information
+- **Name**: ${input.repoName}
+- **Primary Language**: ${input.language || "Unknown"}
+- **Topics/Tags**: ${input.topics.join(", ") || "None"}
+- **Description**: ${input.description || "No description provided"}
+
+## File Structure (first 100 files)
+\`\`\`
 ${fileList}
+\`\`\`
 
-${input.readme ? `README Content:\n${input.readme.slice(0, 5000)}` : "No README found."}
+## Project Documentation
+${input.readme ? `### README Content\n${input.readme.slice(0, 5000)}` : "### README\nNo README found."}
 
-Key Configuration Files:
+## Key Configuration & Implementation Files
 ${keyFilesContent || "No configuration files found."}
 
-Provide your analysis in the following JSON format:
+---
+
+## Analysis Requirements
+
+Analyze this repository focusing on:
+
+1. **Overview & Purpose**
+   - What is the core purpose and primary function of this project?
+   - What problem does it solve or what need does it address?
+   - Who are the intended users/audience?
+
+2. **Architecture & Design**
+   - Describe the overall architecture and organizational structure
+   - Identify major components, modules, and how they interact
+   - Note any design patterns observed (MVC, microservices, monolithic, etc.)
+   - How is code organized (by feature, by layer, hybrid)?
+   - Is there separation of concerns (frontend/backend, client/server)?
+
+3. **Technology Stack Detection**
+   - Identify all significant technologies, frameworks, and libraries
+   - Categorize each by its role and provide confidence levels
+   - Look for patterns in the configuration files, dependencies, and code
+   - Note language-specific ecosystem choices
+
+4. **Key Features & Capabilities**
+   - What are the primary features this project provides?
+   - What makes this project noteworthy or unique?
+   - Are there advanced features indicating project maturity?
+
+5. **Code Quality & Practices**
+   - Assessment of code organization and cleanliness
+   - Testing strategy (presence of test files, test frameworks)
+   - Build and development workflow (scripts, automation)
+   - Configuration management and environment setup
+
+6. **Observations & Insights**
+   - Project maturity level and stage of development
+   - Code quality indicators (complexity, modularity)
+   - Notable patterns or best practices observed
+   - Potential use cases or applications
+   - Any security or scalability considerations evident from structure
+   - Community/maintenance indicators if visible
+
+---
+
+## Response Format
+
+Respond ONLY with valid JSON in this exact structure:
+
+\`\`\`json
 {
-  "overview": "A 2-3 sentence summary of what this repository is and does",
-  "purpose": "A detailed explanation of the project's purpose and what problem it solves",
-  "architecture": "Description of the project's architecture, structure, and how components interact",
-  "keyFeatures": ["Feature 1", "Feature 2", "Feature 3", "Feature 4", "Feature 5"],
-  "technologies": [
-    {"name": "Technology Name", "category": "frontend|backend|database|devops|testing|other", "confidence": 0.9}
+  "overview": "A comprehensive 2-3 sentence summary of what this repository is, its purpose, and primary value proposition",
+  "purpose": "A detailed 3-4 sentence explanation of the project's purpose, the specific problem it solves, target users, and its unique positioning",
+  "architecture": "A detailed 4-5 sentence description of the repository's architecture including: organizational structure, major components, how components interact, design patterns employed, and separation of concerns",
+  "keyFeatures": [
+    "Primary feature or capability 1",
+    "Primary feature or capability 2",
+    "Primary feature or capability 3",
+    "Primary feature or capability 4",
+    "Primary feature or capability 5"
   ],
-  "insights": ["Insight about code quality or patterns", "Insight about project maturity", "Any other notable observations"]
+  "technologies": [
+    {"name": "Technology Name", "category": "frontend|backend|database|devops|testing|other", "confidence": 0.95},
+    {"name": "Technology Name", "category": "frontend|backend|database|devops|testing|other", "confidence": 0.85}
+  ],
+  "insights": [
+    "Specific observation about code quality, patterns, or architecture",
+    "Assessment of project maturity and development stage",
+    "Notable best practices or design decisions observed",
+    "Scalability or performance considerations evident from structure",
+    "Any other significant technical observations or recommendations"
+  ]
 }
+\`\`\`
 
-Categories for technologies:
-- frontend: UI frameworks, CSS tools, bundlers (React, Vue, Tailwind, Webpack)
-- backend: Server frameworks, APIs (Express, Django, Flask, FastAPI)
-- database: Databases, ORMs (PostgreSQL, MongoDB, Prisma, Drizzle)
-- devops: CI/CD, containers, cloud (Docker, GitHub Actions, AWS)
-- testing: Test frameworks (Jest, Pytest, Mocha)
-- other: Languages, utilities, other tools
+## Technology Categories Reference
+- **frontend**: UI frameworks, CSS tools, templating, bundlers, state management (React, Vue, Angular, Tailwind, Webpack, Redux)
+- **backend**: Server frameworks, APIs, middleware, routing (Express, Django, Flask, FastAPI, NestJS, Spring)
+- **database**: Databases, ORMs, data stores (PostgreSQL, MongoDB, MySQL, Prisma, SQLAlchemy, Redis)
+- **devops**: CI/CD, containers, orchestration, cloud platforms (Docker, Kubernetes, GitHub Actions, AWS, GCP)
+- **testing**: Test frameworks, assertion libraries, test runners (Jest, Pytest, Mocha, Vitest, RSpec)
+- **other**: Language runtimes, utilities, build tools, documentation generators
 
-Be thorough but concise. Focus on what makes this repository unique and useful.`;
+## Important Guidelines
+- Be specific and detailed in your analysis - avoid generic statements
+- Provide confidence levels for technologies based on evidence from configuration files and code patterns
+- Focus on what makes this repository technically interesting or notable
+- Ensure all text is professional, clear, and technically accurate
+- Base all observations on evidence visible in the provided code and configuration`;
 }
 
 export async function analyzeWithGemini(input: AnalysisInput, apiKey: string): Promise<AIAnalysis> {
