@@ -360,6 +360,30 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 📈 Roadmap
+
+- [ ] Dark mode enhancements
+- [ ] Repository comparison tool
+- [ ] Team/organization analysis
+- [ ] Advanced filtering and search
+- [ ] Custom analysis prompts
+- [ ] Analysis history and favorites
+- [ ] API endpoint for programmatic access
+- [ ] Chrome/Firefox extension
+- [ ] Mobile app
+
+---
+
+## 💬 Support
+
+Need help? Here are some resources:
+
+- **Documentation** - [See README.md](README.md)
+- **GitHub Issues** - [Report bugs](https://github.com/yourusername/repoScope/issues)
+- **Discussions** - [Ask questions](https://github.com/yourusername/repoScope/discussions)
+
+---
+
 <div align="center">
 
 **Made with ❤️ by Yuvaraj S**
