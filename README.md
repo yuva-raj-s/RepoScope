@@ -340,7 +340,7 @@ Found a bug or have a feature request?
 
 - **Report Issues**: [GitHub Issues](https://github.com/yuva-raj-s/repoScope/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yuva-raj-s/repoScope/discussions)
-- **Email**: [contact@example.com]
+- **Email**: [yuvaraj.reachout@gmail.com]
 
 ---
 
@@ -357,20 +357,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [GitHub API](https://docs.github.com/en/rest) - Repository data
 - [Google Gemini](https://ai.google.dev/) - AI analysis engine
-
----
-
-## 📈 Roadmap
-
-- [ ] Dark mode enhancements
-- [ ] Repository comparison tool
-- [ ] Team/organization analysis
-- [ ] Advanced filtering and search
-- [ ] Custom analysis prompts
-- [ ] Analysis history and favorites
-- [ ] API endpoint for programmatic access
-- [ ] Chrome/Firefox extension
-- [ ] Mobile app
 
 ---
 
