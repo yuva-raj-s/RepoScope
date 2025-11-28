@@ -115,7 +115,8 @@ export function FileTree({ nodes }: FileTreeProps) {
   }
 
   return (
-    <div className="font-mono text-sm" data-testid="file-tree">
+    <div className="font-mono text-sm bg-gradient-to-b from-card/50 to-card rounded-lg p-4" data-testid="file-tree">
+      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3 opacity-75">← File Structure</div>
       {nodes.map((node) => (
         <FileTreeNode key={node.path} node={node} />
       ))}

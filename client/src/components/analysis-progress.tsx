@@ -43,7 +43,7 @@ export function AnalysisProgress({ progress }: AnalysisProgressProps) {
   const isError = progress.stage === "error";
 
   return (
-    <Card className="w-full max-w-2xl mx-auto border-card-border" data-testid="analysis-progress">
+    <Card className="w-full max-w-2xl mx-auto border-primary/30 bg-gradient-to-r from-card/50 to-card" data-testid="analysis-progress">
       <CardContent className="pt-6 space-y-4">
         <div className="flex items-center gap-3">
           <div className={cn("p-2 rounded-lg bg-card", config.color)}>

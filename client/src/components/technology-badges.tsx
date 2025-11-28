@@ -24,6 +24,15 @@ const categoryLabels: Record<TechnologyInfo["category"], string> = {
   other: "Other",
 };
 
+const categoryIcons: Record<TechnologyInfo["category"], string> = {
+  frontend: "◆",
+  backend: "▲",
+  database: "⬟",
+  devops: "⬢",
+  testing: "◇",
+  other: "●",
+};
+
 export function TechnologyBadges({ technologies }: TechnologyBadgesProps) {
   const grouped = technologies.reduce(
     (acc, tech) => {
@@ -53,8 +62,8 @@ export function TechnologyBadges({ technologies }: TechnologyBadgesProps) {
 
         return (
           <div key={category} className="space-y-1.5">
-            <span className="text-xs uppercase tracking-wide text-muted-foreground font-medium">
-              {categoryLabels[category]}
+            <span className="text-xs uppercase tracking-widest text-muted-foreground font-mono font-medium">
+              {categoryIcons[category]} {categoryLabels[category].toUpperCase()}
             </span>
             <div className="flex flex-wrap gap-1.5">
               {techs.map((tech) => (

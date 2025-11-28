@@ -52,11 +52,11 @@ export function RepositoryInput({ onSubmit, isLoading }: RepositoryInputProps) {
               <FormItem>
                 <FormControl>
                   <div className="relative flex items-center">
-                    <Github className="absolute left-4 h-5 w-5 text-muted-foreground" />
+                    <Github className="absolute left-4 h-5 w-5 text-primary opacity-75 animate-pulse" />
                     <Input
                       {...field}
                       placeholder="https://github.com/owner/repository"
-                      className="pl-12 pr-32 h-14 text-base font-mono bg-card border-card-border"
+                      className="pl-12 pr-32 h-14 text-base font-mono bg-gradient-to-r from-card to-card border border-primary/20 focus:border-primary/50 transition-colors"
                       disabled={isLoading}
                       data-testid="input-repository-url"
                     />

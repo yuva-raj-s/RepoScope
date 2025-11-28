@@ -75,7 +75,7 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
     <div className="w-full max-w-6xl mx-auto space-y-6 animate-slide-up" data-testid="analysis-results">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-6">
-          <Card className="border-card-border hover-elevate transition-all">
+          <Card className="border-primary/25 hover-elevate transition-all bg-gradient-to-b from-card/60 to-card">
             <div className="flex items-center justify-between mb-2">
               <span></span>
               <AnalysisActions analysis={analysis} />
@@ -122,22 +122,22 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
               )}
 
               <div className="grid grid-cols-3 gap-3">
-                <div className="flex flex-col items-center p-3 rounded-lg bg-card border border-card-border">
-                  <Star className="h-4 w-4 text-chart-4 mb-1" />
+                <div className="flex flex-col items-center p-3 rounded-lg bg-card/50 border border-primary/20 hover-elevate">
+                  <Star className="h-4 w-4 text-chart-4 mb-1 tech-icon-glow" />
                   <span className="text-lg font-semibold" data-testid="text-stars">
                     {formatNumber(metadata.stars)}
                   </span>
                   <span className="text-xs text-muted-foreground">Stars</span>
                 </div>
-                <div className="flex flex-col items-center p-3 rounded-lg bg-card border border-card-border">
-                  <GitFork className="h-4 w-4 text-chart-1 mb-1" />
+                <div className="flex flex-col items-center p-3 rounded-lg bg-card/50 border border-primary/20 hover-elevate">
+                  <GitFork className="h-4 w-4 text-chart-1 mb-1 tech-icon-glow" />
                   <span className="text-lg font-semibold" data-testid="text-forks">
                     {formatNumber(metadata.forks)}
                   </span>
                   <span className="text-xs text-muted-foreground">Forks</span>
                 </div>
-                <div className="flex flex-col items-center p-3 rounded-lg bg-card border border-card-border">
-                  <Code2 className="h-4 w-4 text-chart-2 mb-1" />
+                <div className="flex flex-col items-center p-3 rounded-lg bg-card/50 border border-primary/20 hover-elevate">
+                  <Code2 className="h-4 w-4 text-chart-2 mb-1 tech-icon-glow" />
                   <span className="text-lg font-semibold truncate max-w-full" data-testid="text-language">
                     {metadata.language || "N/A"}
                   </span>
@@ -164,11 +164,11 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
             </CardContent>
           </Card>
 
-          <Card className="border-card-border">
+          <Card className="border-primary/25 bg-gradient-to-b from-card/60 to-card">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-semibold flex items-center gap-2">
-                <Layers className="h-4 w-4 text-chart-3" />
-                Tech Stack
+              <CardTitle className="text-base font-semibold flex items-center gap-2 font-mono">
+                <Layers className="h-4 w-4 text-chart-3 tech-icon-glow" />
+                <span className="code-badge">Tech Stack</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -178,10 +178,10 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-          <Card className="border-card-border">
+          <Card className="border-primary/25 bg-gradient-to-br from-card/60 via-card/40 to-card">
             <CardHeader className="pb-3">
               <CardTitle className="text-xl font-semibold flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-chart-3" />
+                <Sparkles className="h-5 w-5 text-chart-3 tech-icon-glow animate-pulse" />
                 AI Analysis
               </CardTitle>
             </CardHeader>
@@ -263,18 +263,18 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
           </Card>
 
           <Tabs defaultValue="structure" className="w-full">
-            <TabsList className="w-full grid grid-cols-2">
-              <TabsTrigger value="structure" className="gap-2" data-testid="tab-structure">
+            <TabsList className="w-full grid grid-cols-2 bg-card/50 border border-primary/20">
+              <TabsTrigger value="structure" className="gap-2 font-mono text-xs" data-testid="tab-structure">
                 <FolderTree className="h-4 w-4" />
-                File Structure
+                Structure
               </TabsTrigger>
-              <TabsTrigger value="readme" className="gap-2" data-testid="tab-readme" disabled={!readme}>
+              <TabsTrigger value="readme" className="gap-2 font-mono text-xs" data-testid="tab-readme" disabled={!readme}>
                 <BookOpen className="h-4 w-4" />
                 README
               </TabsTrigger>
             </TabsList>
             <TabsContent value="structure">
-              <Card className="border-card-border">
+              <Card className="border-primary/25 bg-gradient-to-b from-card/50 to-card">
                 <CardContent className="pt-4">
                   <ScrollArea className="h-[400px] pr-4">
                     <FileTree nodes={fileTree} />
@@ -283,7 +283,7 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
               </Card>
             </TabsContent>
             <TabsContent value="readme">
-              <Card className="border-card-border">
+              <Card className="border-primary/25 bg-gradient-to-b from-card/50 to-card">
                 <CardContent className="pt-4">
                   {readme ? (
                     <ScrollArea className="h-[400px] pr-4">
