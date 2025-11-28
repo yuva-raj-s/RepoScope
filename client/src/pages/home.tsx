@@ -8,8 +8,9 @@ import { AnalysisResults } from "@/components/analysis-results";
 import { AppHeader } from "@/components/app-header";
 import { ApiSetupModal } from "@/components/api-setup-modal";
 import { Button } from "@/components/ui/button";
-import { apiRequest } from "@/lib/queryClient";
 import { notify } from "@/lib/notification";
+import { analyzeRepository } from "@/lib/ai-analysis-client";
+import { parseGitHubUrl, getRepositoryMetadata, getRepositoryTree, getReadmeContent, getFileContents, extractKeyFiles } from "@/lib/github-client";
 import type { RepositoryAnalysis, AnalysisProgress as AnalysisProgressType } from "@shared/schema";
 import type { ApiProvider } from "@shared/api-schema";
 
@@ -65,13 +66,46 @@ export default function Home() {
       setAnalysis(null);
       setProgress({ stage: "fetching", message: "Connecting to GitHub...", progress: 10 });
       
-      const response = await apiRequest("POST", "/api/analyze", { 
-        url,
-        apiProvider: apiConfig.provider,
-        apiKey: apiConfig.apiKey,
-      });
-      const data = await response.json();
-      return data as RepositoryAnalysis;
+      const parsed = parseGitHubUrl(url);
+      if (!parsed) {
+        throw new Error("Invalid GitHub URL format. Please use: https://github.com/owner/repo");
+      }
+
+      const { owner, repo } = parsed;
+
+      setProgress({ stage: "fetching", message: "Fetching repository metadata...", progress: 20 });
+      const [metadata, fileTree, readme] = await Promise.all([
+        getRepositoryMetadata(owner, repo),
+        getRepositoryTree(owner, repo),
+        getReadmeContent(owner, repo),
+      ]);
+
+      metadata.hasReadme = readme !== null;
+
+      setProgress({ stage: "fetching", message: "Analyzing repository structure...", progress: 40 });
+      const keyFilePaths = extractKeyFiles(fileTree);
+      const keyFileContents = await getFileContents(owner, repo, keyFilePaths);
+
+      setProgress({ stage: "analyzing", message: "Running AI analysis...", progress: 60 });
+      const aiAnalysis = await analyzeRepository({
+        repoName: metadata.fullName,
+        description: metadata.description,
+        language: metadata.language,
+        topics: metadata.topics,
+        readme,
+        fileTree,
+        keyFileContents,
+      }, apiConfig.provider, apiConfig.apiKey);
+
+      const analysis: RepositoryAnalysis = {
+        metadata,
+        fileTree,
+        readme,
+        aiAnalysis,
+        analyzedAt: new Date().toISOString(),
+      };
+
+      return analysis;
     },
     onSuccess: (data) => {
       setProgress({ stage: "complete", message: "Analysis complete!", progress: 100 });
