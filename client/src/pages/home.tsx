@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { ApiSetupModal } from "@/components/api-setup-modal";
 import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
+import { notify } from "@/lib/notification";
 import type { RepositoryAnalysis, AnalysisProgress as AnalysisProgressType } from "@shared/schema";
 import type { ApiProvider } from "@shared/api-schema";
 
@@ -19,7 +19,6 @@ interface ApiConfig {
 }
 
 export default function Home() {
-  const { toast } = useToast();
   const [analysis, setAnalysis] = useState<RepositoryAnalysis | null>(null);
   const [progress, setProgress] = useState<AnalysisProgressType | null>(null);
   const [apiConfig, setApiConfig] = useState<ApiConfig | null>(null);
@@ -43,9 +42,9 @@ export default function Home() {
     setApiConfig(config);
     localStorage.setItem("repoScope_apiConfig", JSON.stringify(config));
     setShowApiModal(false);
-    toast({
-      title: "Success!",
-      description: `${provider.charAt(0).toUpperCase() + provider.slice(1)} API key configured`,
+    notify.success({
+      title: "API configured!",
+      description: `${provider === "gemini" ? "Google Gemini" : provider === "openai" ? "OpenAI" : provider === "claude" ? "Anthropic Claude" : "Cohere"} is ready to use`,
     });
   };
 
@@ -77,15 +76,21 @@ export default function Home() {
       }, 500);
     },
     onError: (error: Error) => {
+      const errorMessage = error.message || "Failed to analyze repository";
       setProgress({ 
         stage: "error", 
-        message: error.message || "Failed to analyze repository", 
+        message: errorMessage, 
         progress: 0 
       });
-      toast({
-        title: "Analysis Failed",
-        description: error.message || "Failed to analyze the repository. Please try again.",
-        variant: "destructive",
+      notify.error({
+        title: "Analysis failed",
+        description: errorMessage.includes("rate limit") 
+          ? "API rate limit reached. Please try again later."
+          : errorMessage.includes("401") || errorMessage.includes("API key")
+          ? "Invalid API key. Please check your configuration."
+          : errorMessage.includes("404")
+          ? "Repository not found. Please check the URL."
+          : "Could not complete the analysis. Please try again.",
       });
     },
   });

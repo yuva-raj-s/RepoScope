@@ -17,7 +17,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { AlertCircle, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink, CheckCircle2 } from "lucide-react";
+import { notify } from "@/lib/notification";
 
 type Provider = "gemini" | "openai" | "claude" | "cohere";
 
@@ -68,10 +69,26 @@ export function ApiSetupModal({ open, onOpenChange, onSave }: ApiSetupModalProps
   const providerInfo = providers[provider];
 
   const handleSave = () => {
-    if (apiKey.trim()) {
-      onSave(provider, apiKey);
-      setApiKey("");
+    if (!apiKey.trim()) {
+      notify.warning({
+        title: "Please enter your API key",
+        description: "API key cannot be empty",
+      });
+      return;
     }
+    if (apiKey.length < 10) {
+      notify.warning({
+        title: "API key seems too short",
+        description: "Please verify your API key is correct",
+      });
+      return;
+    }
+    onSave(provider, apiKey);
+    setApiKey("");
+    notify.success({
+      title: "API configured successfully!",
+      description: `Ready to analyze repositories with ${provider}`,
+    });
   };
 
   return (

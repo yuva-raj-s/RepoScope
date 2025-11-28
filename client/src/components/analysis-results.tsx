@@ -23,7 +23,7 @@ import {
 import { FileTree } from "./file-tree";
 import { TechnologyBadges } from "./technology-badges";
 import { AnalysisActions } from "./analysis-actions";
-import { useToast } from "@/hooks/use-toast";
+import { notify } from "@/lib/notification";
 import type { RepositoryAnalysis } from "@shared/schema";
 
 interface AnalysisResultsProps {
@@ -51,22 +51,21 @@ function formatNumber(num: number): string {
 
 export function AnalysisResults({ analysis }: AnalysisResultsProps) {
   const { metadata, fileTree, readme, aiAnalysis } = analysis;
-  const { toast } = useToast();
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   const handleCopy = async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedText(label);
-      toast({
-        title: "Copied!",
-        description: `${label} copied to clipboard`,
+      notify.success({
+        title: "Copied to clipboard!",
+        description: `${label} is ready to paste`,
       });
       setTimeout(() => setCopiedText(null), 2000);
     } catch {
-      toast({
-        title: "Failed to copy",
-        variant: "destructive",
+      notify.error({
+        title: "Copy failed",
+        description: "Could not copy to clipboard",
       });
     }
   };
