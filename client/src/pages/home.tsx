@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { GitBranch, Code2, Brain, Sparkles, Zap, Cpu, GitFork, Layers3, Database, Gauge, Settings } from "lucide-react";
+import { Welcome } from "./welcome";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
@@ -23,6 +24,7 @@ export default function Home() {
   const [progress, setProgress] = useState<AnalysisProgressType | null>(null);
   const [apiConfig, setApiConfig] = useState<ApiConfig | null>(null);
   const [showApiModal, setShowApiModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const stored = localStorage.getItem("repoScope_apiConfig");
@@ -31,11 +33,9 @@ export default function Home() {
         setApiConfig(JSON.parse(stored));
       } catch {
         localStorage.removeItem("repoScope_apiConfig");
-        setShowApiModal(true);
       }
-    } else {
-      setShowApiModal(true);
     }
+    setIsLoading(false);
   }, []);
 
   const handleSaveApi = (provider: ApiProvider, apiKey: string) => {
@@ -48,6 +48,18 @@ export default function Home() {
       description: `${provider.charAt(0).toUpperCase() + provider.slice(1)} API key configured`,
     });
   };
+
+  const handleGetStarted = () => {
+    setShowApiModal(true);
+  };
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!apiConfig) {
+    return <Welcome onGetStarted={handleGetStarted} />;
+  }
 
   const analyzeMutation = useMutation({
     mutationFn: async (url: string) => {
