@@ -58,7 +58,16 @@ export default function Home() {
   }
 
   if (!apiConfig) {
-    return <Welcome onGetStarted={handleGetStarted} />;
+    return (
+      <>
+        <Welcome onGetStarted={handleGetStarted} />
+        <ApiSetupModal 
+          open={showApiModal}
+          onOpenChange={setShowApiModal}
+          onSave={handleSaveApi}
+        />
+      </>
+    );
   }
 
   const analyzeMutation = useMutation({
