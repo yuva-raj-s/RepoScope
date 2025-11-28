@@ -2,7 +2,17 @@ import OpenAI from "openai";
 import type { AIAnalysis, FileNode, TechnologyInfo } from "@shared/schema";
 
 // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let openaiClient: OpenAI | null = null;
+
+function getOpenAI(): OpenAI {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OpenAI API key not configured. Please add your OPENAI_API_KEY to use AI analysis.");
+  }
+  if (!openaiClient) {
+    openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return openaiClient;
+}
 
 interface AnalysisInput {
   repoName: string;
@@ -78,6 +88,7 @@ Categories for technologies:
 Be thorough but concise. Focus on what makes this repository unique and useful.`;
 
   try {
+    const openai = getOpenAI();
     const response = await openai.chat.completions.create({
       model: "gpt-5",
       messages: [
