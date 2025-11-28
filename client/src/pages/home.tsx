@@ -7,6 +7,7 @@ import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
 import { AppHeader } from "@/components/app-header";
 import { ApiSetupModal } from "@/components/api-setup-modal";
+import Aurora from "@/components/Aurora";
 import { Button } from "@/components/ui/button";
 import { notify } from "@/lib/notification";
 import { analyzeRepository } from "@/lib/ai-analysis-client";
@@ -161,8 +162,17 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background gradient-light-bulb">
-      <AppHeader
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="fixed inset-0 z-0">
+        <Aurora
+          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
+      <div className="relative z-10">
+        <AppHeader
         onLogoClick={handleLogoClick}
         onApiSettings={() => setShowApiModal(true)}
         apiProvider={apiConfig?.provider}
@@ -179,7 +189,7 @@ export default function Home() {
         onSave={handleSaveApi}
       />
 
-      <main className="px-4 py-6 relative z-10">
+      <main className="px-4 py-6">
         {!analysis && !progress && (
           <div className="max-w-4xl mx-auto animate-fade-in">
             <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
@@ -297,7 +307,8 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="border-t py-6 mt-12">
+      </div>
+      <footer className="border-t py-6 mt-12 relative z-10">
         <div className="max-w-6xl mx-auto px-4 text-center text-sm text-muted-foreground">
           <p>RepoScope — AI-powered GitHub repository analysis</p>
         </div>
