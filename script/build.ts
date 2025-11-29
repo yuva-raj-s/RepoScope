@@ -40,7 +40,7 @@ async function buildAll() {
     build: {
       outDir: "dist/public",
       rollupOptions: {
-        input: "client/index.html",
+        input: "index.html",
       },
     },
   });
