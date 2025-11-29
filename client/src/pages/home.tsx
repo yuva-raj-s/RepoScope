@@ -328,6 +328,21 @@ export default function Home() {
               <Github className="h-4 w-4" />
               <span className="font-mono text-xs">yuva-raj-s/RepoScope</span>
             </a>
+      <footer className="relative z-10 mt-auto w-full">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="mt-16 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl border bg-background/50 p-6 text-sm text-muted-foreground shadow-sm backdrop-blur-sm">
+            <div className="flex items-center gap-2">
+              <a href="https://github.com/yuva-raj-s/RepoScope" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <Github className="h-5 w-5" />
+                <span className="font-mono">yuva-raj-s/RepoScope</span>
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>Made with</span>
+              <Heart className="h-5 w-5 text-red-500 fill-current" />
+              <span>by</span>
+              <span className="font-semibold text-foreground">Yuvaraj</span>
+            </div>
           </div>
           <div className="flex items-center gap-1.5">
             <span>Made with</span>
