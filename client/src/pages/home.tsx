@@ -7,7 +7,6 @@ import { AnalysisProgress } from "@/components/analysis-progress";
 import { AnalysisResults } from "@/components/analysis-results";
 import { AppHeader } from "@/components/app-header";
 import { ApiSetupModal } from "@/components/api-setup-modal";
-import Aurora from "@/components/Aurora";
 import { Button } from "@/components/ui/button";
 import { notify } from "@/lib/notification";
 import { analyzeRepository } from "@/lib/ai-analysis-client";
@@ -162,16 +161,20 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-background dark:bg-[#020617] relative overflow-hidden">
-      {/* Light Mode: Aurora Animation */}
-      <div className="fixed inset-0 z-0 dark:hidden">
-        <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
-        />
-      </div>
+    <div className="min-h-screen w-full bg-white dark:bg-[#020617] relative overflow-hidden">
+      {/* Light Mode: Dual Gradient Overlay Background */}
+      <div
+        className="absolute inset-0 z-0 dark:hidden"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
+            radial-gradient(circle 500px at 20% 80%, rgba(139,92,246,0.3), transparent),
+            radial-gradient(circle 500px at 80% 20%, rgba(59,130,246,0.3), transparent)
+          `,
+          backgroundSize: "48px 48px, 48px 48px, 100% 100%, 100% 100%",
+        }}
+      />
       
       {/* Dark Mode: Grid Background */}
       <div
