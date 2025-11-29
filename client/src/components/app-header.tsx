@@ -16,7 +16,11 @@ export function AppHeader({
   currentView = "home",
 }: AppHeaderProps) {
   return (
+<<<<<<< HEAD
     <header className="sticky top-0 z-50 border-b bg-background/95 dark:bg-black/40 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:supports-[backdrop-filter]:bg-black/30">
+=======
+    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+>>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
         {/* Logo Section */}
         <button
@@ -31,6 +35,8 @@ export function AppHeader({
           <span className="font-semibold text-lg">RepoScope</span>
         </button>
 
+<<<<<<< HEAD
+=======
         {/* Breadcrumb Navigation */}
         {currentView !== "home" && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground ml-auto mr-auto">
@@ -49,6 +55,7 @@ export function AppHeader({
             )}
           </div>
         )}
+>>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
 
         {/* Right Section */}
         <div className="flex items-center gap-2 ml-auto">
