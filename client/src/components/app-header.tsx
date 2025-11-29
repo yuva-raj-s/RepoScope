@@ -31,25 +31,6 @@ export function AppHeader({
           <span className="font-semibold text-lg">RepoScope</span>
         </button>
 
-        {/* Breadcrumb Navigation */}
-        {currentView !== "home" && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground ml-auto mr-auto">
-            <span>Repository Analysis</span>
-            {currentView === "analyzing" && (
-              <>
-                <span>/</span>
-                <span className="animate-pulse">Analyzing...</span>
-              </>
-            )}
-            {currentView === "results" && (
-              <>
-                <span>/</span>
-                <span>Results</span>
-              </>
-            )}
-          </div>
-        )}
-
         {/* Right Section */}
         <div className="flex items-center gap-2 ml-auto">
           <Button

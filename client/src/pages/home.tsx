@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Code2, Brain, Sparkles, Cpu, GitFork, Layers3, Database, Gauge } from "lucide-react";
+import { Code2, Brain, Sparkles, Cpu, GitFork, Layers3, Database, Gauge, Github, Heart } from "lucide-react";
 import { Welcome } from "./welcome";
 import { RepositoryInput } from "@/components/repository-input";
 import { AnalysisProgress } from "@/components/analysis-progress";
@@ -161,7 +161,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
         <AppHeader
           onLogoClick={handleLogoClick}
           onApiSettings={() => setShowApiModal(true)}
@@ -179,7 +179,7 @@ export default function Home() {
           onSave={handleSaveApi}
         />
 
-        <main className="px-4 py-6 relative">
+        <main className="px-4 py-6 relative flex-grow">
           {/* Backgrounds are now inside the main content area */}
           <div className="absolute inset-0 -z-10">
             {/* Light Mode: Cotton Candy Sky Gradient */}
@@ -321,9 +321,20 @@ export default function Home() {
           )}
         </main>
 
-      <footer className="border-t py-6 mt-12 relative z-10 bg-background">
-        <div className="max-w-6xl mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>RepoScope — AI-powered GitHub repository analysis</p>
+      <footer className="border-t py-4 relative z-10 bg-background">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground gap-2">
+          <div className="flex items-center gap-2">
+            <a href="https://github.com/yuva-raj-s/RepoScope" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-foreground transition-colors">
+              <Github className="h-4 w-4" />
+              <span className="font-mono text-xs">yuva-raj-s/RepoScope</span>
+            </a>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span>Made with</span>
+            <Heart className="h-4 w-4 text-red-500" />
+            <span>by</span>
+            <span className="font-semibold text-foreground">Yuvaraj</span>
+          </div>
         </div>
       </footer>
     </div>
