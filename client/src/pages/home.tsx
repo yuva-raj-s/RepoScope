@@ -161,32 +161,26 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-[#020617] relative overflow-hidden">
-      {/* Light Mode: Dual Gradient Overlay Background */}
+    <div className="min-h-screen w-full relative overflow-hidden">
+      {/* Light Mode: Cotton Candy Sky Gradient */}
       <div
         className="absolute inset-0 z-0 dark:hidden"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
-            radial-gradient(circle 500px at 20% 80%, rgba(139,92,246,0.3), transparent),
-            radial-gradient(circle 500px at 80% 20%, rgba(59,130,246,0.3), transparent)
-          `,
-          backgroundSize: "48px 48px, 48px 48px, 100% 100%, 100% 100%",
+          background: `linear-gradient(225deg, #FFB3D9 0%, #FFD1DC 20%, #FFF0F5 40%, #E6F3FF 60%, #D1E7FF 80%, #C7E9F1 100%)`,
         }}
       />
       
-      {/* Dark Mode: Grid Background */}
+      {/* Dark Mode: Cosmic Aurora */}
       <div
         className="absolute inset-0 z-0 hidden dark:block"
         style={{
-          background: "#020617",
+          background: "#0a0a0a",
           backgroundImage: `
-            linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(71,85,105,0.3) 1px, transparent 1px),
-            radial-gradient(circle at 50% 50%, rgba(139,92,246,0.15) 0%, transparent 70%)
+            radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 70%),
+            radial-gradient(ellipse at 60% 20%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
+            radial-gradient(ellipse at 40% 80%, rgba(34, 197, 94, 0.2) 0%, transparent 65%)
           `,
-          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
         }}
       />
       
