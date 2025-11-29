@@ -16,7 +16,7 @@ export function AppHeader({
   currentView = "home",
 }: AppHeaderProps) {
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 border-b bg-background/95 dark:bg-black/40 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:supports-[backdrop-filter]:bg-black/30">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
         {/* Logo Section */}
         <button
