@@ -32,7 +32,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/repoScope.git
+   git clone https://github.com/yuva-raj-s/repoScope.git
    cd repoScope
    ```
 
@@ -295,7 +295,7 @@ Contributions are welcome! Here's how you can help:
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/repoScope.git
+   git clone https://github.com/yuva-raj-s/repoScope.git
    ```
 
 2. **Create a feature branch**
@@ -338,9 +338,9 @@ Contributions are welcome! Here's how you can help:
 
 Found a bug or have a feature request?
 
-- **Report Issues**: [GitHub Issues](https://github.com/yourusername/repoScope/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/repoScope/discussions)
-- **Email**: [contact@example.com]
+- **Report Issues**: [GitHub Issues](https://github.com/yuva-raj-s/repoScope/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yuva-raj-s/repoScope/discussions)
+- **Email**: [yuvaraj.reachout@gmail.com]
 
 ---
 
@@ -386,7 +386,7 @@ Need help? Here are some resources:
 
 <div align="center">
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by Yuvaraj S**
 
 [⬆ back to top](#-repoScope)
 

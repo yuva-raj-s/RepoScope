@@ -161,6 +161,7 @@ export default function Home() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen w-full relative overflow-hidden">
       {/* Light Mode: Cotton Candy Sky Gradient */}
       <div
@@ -187,6 +188,10 @@ export default function Home() {
       
       <div className="relative z-10">
         <AppHeader
+=======
+    <div className="min-h-screen bg-background gradient-light-bulb">
+      <AppHeader
+>>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
         onLogoClick={handleLogoClick}
         onApiSettings={() => setShowApiModal(true)}
         apiProvider={apiConfig?.provider}
@@ -203,7 +208,11 @@ export default function Home() {
         onSave={handleSaveApi}
       />
 
+<<<<<<< HEAD
       <main className="px-4 py-6">
+=======
+      <main className="px-4 py-6 relative z-10">
+>>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
         {!analysis && !progress && (
           <div className="max-w-4xl mx-auto animate-fade-in">
             <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
