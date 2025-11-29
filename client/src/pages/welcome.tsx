@@ -44,8 +44,8 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-            <div className="p-4 rounded-lg glow-card animate-scale-in" style={{ animationDelay: "0.1s" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="magic-bento-card animate-scale-in" style={{ animationDelay: "0.1s" }}>
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-chart-1/15 flex-shrink-0">
                   <GitBranch className="h-4 w-4 text-chart-1 tech-icon-glow" />
@@ -57,7 +57,7 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
               </div>
             </div>
 
-            <div className="p-4 rounded-lg glow-card animate-scale-in" style={{ animationDelay: "0.2s" }}>
+            <div className="magic-bento-card animate-scale-in" style={{ animationDelay: "0.2s" }}>
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-chart-2/15 flex-shrink-0">
                   <Cpu className="h-4 w-4 text-chart-2 tech-icon-glow" />
@@ -69,7 +69,7 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
               </div>
             </div>
 
-            <div className="p-4 rounded-lg glow-card animate-scale-in" style={{ animationDelay: "0.3s" }}>
+            <div className="magic-bento-card animate-scale-in" style={{ animationDelay: "0.3s" }}>
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-chart-3/15 flex-shrink-0">
                   <Zap className="h-4 w-4 text-chart-3 tech-icon-glow" />
@@ -81,7 +81,7 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
               </div>
             </div>
 
-            <div className="p-4 rounded-lg glow-card animate-scale-in" style={{ animationDelay: "0.4s" }}>
+            <div className="magic-bento-card animate-scale-in" style={{ animationDelay: "0.4s" }}>
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-lg bg-chart-5/15 flex-shrink-0">
                   <Sparkles className="h-4 w-4 text-chart-5 tech-icon-glow" />
@@ -95,7 +95,7 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-card to-card rounded-xl p-6 border border-primary/20 text-center animate-slide-up" style={{ animationDelay: "0.5s" }}>
+          <div className="magic-bento-card magical-glow text-center animate-slide-up" style={{ animationDelay: "0.5s" }}>
             <h2 className="text-xl font-bold mb-2">Ready to get started?</h2>
             <p className="text-sm text-muted-foreground mb-4">
               Set up your AI API key to start analyzing repositories.

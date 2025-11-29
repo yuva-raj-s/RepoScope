@@ -74,7 +74,7 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
     <div className="w-full max-w-6xl mx-auto space-y-6 animate-slide-up" data-testid="analysis-results">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-6">
-          <Card className="border-primary/25 hover-elevate transition-all bg-gradient-to-b from-card/60 to-card">
+          <Card className="magic-bento-card magical-glow transition-all">
             <div className="flex items-center justify-between mb-2">
               <span></span>
               <AnalysisActions analysis={analysis} />
