@@ -37,7 +37,12 @@ async function buildAll() {
 
   console.log("building client...");
   await viteBuild({
-    root: "client",
+    build: {
+      outDir: "dist/public",
+      rollupOptions: {
+        input: "client/index.html",
+      },
+    },
   });
 
   console.log("building server...");
