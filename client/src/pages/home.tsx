@@ -162,8 +162,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      <div className="fixed inset-0 z-0">
+    <div className="min-h-screen w-full bg-background dark:bg-[#020617] relative overflow-hidden">
+      {/* Light Mode: Aurora Animation */}
+      <div className="fixed inset-0 z-0 dark:hidden">
         <Aurora
           colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
           blend={0.5}
@@ -171,6 +172,21 @@ export default function Home() {
           speed={0.5}
         />
       </div>
+      
+      {/* Dark Mode: Grid Background */}
+      <div
+        className="absolute inset-0 z-0 hidden dark:block"
+        style={{
+          background: "#020617",
+          backgroundImage: `
+            linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(71,85,105,0.3) 1px, transparent 1px),
+            radial-gradient(circle at 50% 50%, rgba(139,92,246,0.15) 0%, transparent 70%)
+          `,
+          backgroundSize: "32px 32px, 32px 32px, 100% 100%",
+        }}
+      />
+      
       <div className="relative z-10">
         <AppHeader
         onLogoClick={handleLogoClick}
