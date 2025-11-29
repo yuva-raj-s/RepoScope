@@ -22,10 +22,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
-      // Add an alias to handle absolute paths starting with /src
-      // This will map /src/... to the correct client/src/... directory
-      // The `find` regex matches paths starting with /src
-      "/src": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
