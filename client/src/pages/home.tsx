@@ -161,31 +161,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
-      {/* Light Mode: Cotton Candy Sky Gradient */}
-      <div
-        className="absolute inset-0 z-0 dark:hidden"
-        style={{
-          background: `linear-gradient(225deg, #FFB3D9 0%, #FFD1DC 20%, #FFF0F5 40%, #E6F3FF 60%, #D1E7FF 80%, #C7E9F1 100%)`,
-        }}
-      />
-
-      {/* Dark Mode: Stellar Mist */}
-      <div
-        className="absolute inset-0 z-0 hidden dark:block"
-        style={{
-          background: `
-            radial-gradient(ellipse 140% 50% at 15% 60%, rgba(124, 58, 237, 0.11), transparent 48%),
-            radial-gradient(ellipse 90% 80% at 85% 25%, rgba(245, 101, 101, 0.09), transparent 58%),
-            radial-gradient(ellipse 120% 65% at 40% 90%, rgba(34, 197, 94, 0.13), transparent 52%),
-            radial-gradient(ellipse 100% 45% at 70% 5%, rgba(251, 191, 36, 0.07), transparent 42%),
-            radial-gradient(ellipse 80% 75% at 90% 80%, rgba(168, 85, 247, 0.10), transparent 55%),
-            #000000
-          `,
-        }}
-      />
-
-      <div className="relative z-10">
+    <div className="min-h-screen bg-background">
         <AppHeader
           onLogoClick={handleLogoClick}
           onApiSettings={() => setShowApiModal(true)}
@@ -203,7 +179,31 @@ export default function Home() {
           onSave={handleSaveApi}
         />
 
-        <main className="px-4 py-6">
+        <main className="px-4 py-6 relative">
+          {/* Backgrounds are now inside the main content area */}
+          <div className="absolute inset-0 -z-10">
+            {/* Light Mode: Cotton Candy Sky Gradient */}
+            <div
+              className="absolute inset-0 dark:hidden"
+              style={{
+                background: `linear-gradient(225deg, #FFB3D9 0%, #FFD1DC 20%, #FFF0F5 40%, #E6F3FF 60%, #D1E7FF 80%, #C7E9F1 100%)`,
+              }}
+            />
+            {/* Dark Mode: Stellar Mist */}
+            <div
+              className="absolute inset-0 hidden dark:block"
+              style={{
+                background: `
+                  radial-gradient(ellipse 140% 50% at 15% 60%, rgba(124, 58, 237, 0.11), transparent 48%),
+                  radial-gradient(ellipse 90% 80% at 85% 25%, rgba(245, 101, 101, 0.09), transparent 58%),
+                  radial-gradient(ellipse 120% 65% at 40% 90%, rgba(34, 197, 94, 0.13), transparent 52%),
+                  radial-gradient(ellipse 100% 45% at 70% 5%, rgba(251, 191, 36, 0.07), transparent 42%),
+                  radial-gradient(ellipse 80% 75% at 90% 80%, rgba(168, 85, 247, 0.10), transparent 55%),
+                  #000000
+                `,
+              }}
+            />
+          </div>
           {!analysis && !progress && (
             <div className="max-w-4xl mx-auto animate-fade-in">
               <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
@@ -321,8 +321,7 @@ export default function Home() {
           )}
         </main>
 
-      </div>
-      <footer className="border-t py-6 mt-12 relative z-10">
+      <footer className="border-t py-6 mt-12 relative z-10 bg-background">
         <div className="max-w-6xl mx-auto px-4 text-center text-sm text-muted-foreground">
           <p>RepoScope — AI-powered GitHub repository analysis</p>
         </div>

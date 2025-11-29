@@ -16,6 +16,10 @@
     {
       "source": "/api/:path*",
       "destination": "/server/index.ts"
+    },
+    {
+      "source": "/((?!api/|assets/).*)",
+      "destination": "/index.html"
     }
   ]
 }
