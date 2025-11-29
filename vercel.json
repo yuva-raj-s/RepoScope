@@ -1,21 +1,21 @@
 {
+  "env": {
+    "NODE_ENV": "production"
+  },
   "builds": [
+    {
+      "src": "server/index.ts",
+      "use": "@vercel/node"
+    },
     {
       "src": "client/package.json",
       "use": "@vercel/static-build"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/server/index.ts"
     }
   ]
 }
