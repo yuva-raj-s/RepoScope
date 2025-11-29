@@ -161,7 +161,6 @@ export default function Home() {
   }
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen w-full relative overflow-hidden">
       {/* Light Mode: Cotton Candy Sky Gradient */}
       <div
@@ -170,7 +169,7 @@ export default function Home() {
           background: `linear-gradient(225deg, #FFB3D9 0%, #FFD1DC 20%, #FFF0F5 40%, #E6F3FF 60%, #D1E7FF 80%, #C7E9F1 100%)`,
         }}
       />
-      
+
       {/* Dark Mode: Stellar Mist */}
       <div
         className="absolute inset-0 z-0 hidden dark:block"
@@ -185,150 +184,142 @@ export default function Home() {
           `,
         }}
       />
-      
+
       <div className="relative z-10">
         <AppHeader
-=======
-    <div className="min-h-screen bg-background gradient-light-bulb">
-      <AppHeader
->>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
-        onLogoClick={handleLogoClick}
-        onApiSettings={() => setShowApiModal(true)}
-        apiProvider={apiConfig?.provider}
-        currentView={
-          progress?.stage === "error" || progress?.stage === "complete" ? "results" :
-          progress ? "analyzing" : 
-          analysis ? "results" : "input"
-        }
-      />
+          onLogoClick={handleLogoClick}
+          onApiSettings={() => setShowApiModal(true)}
+          apiProvider={apiConfig?.provider}
+          currentView={
+            progress?.stage === "error" || progress?.stage === "complete" ? "results" :
+            progress ? "analyzing" :
+            analysis ? "results" : "input"
+          }
+        />
 
-      <ApiSetupModal 
-        open={showApiModal}
-        onOpenChange={setShowApiModal}
-        onSave={handleSaveApi}
-      />
+        <ApiSetupModal
+          open={showApiModal}
+          onOpenChange={setShowApiModal}
+          onSave={handleSaveApi}
+        />
 
-<<<<<<< HEAD
-      <main className="px-4 py-6">
-=======
-      <main className="px-4 py-6 relative z-10">
->>>>>>> 596feb5f15cae39789880d7b4d80a427fd1e29e4
-        {!analysis && !progress && (
-          <div className="max-w-4xl mx-auto animate-fade-in">
-            <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="h-px w-8 accent-line"></div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium code-badge">
-                  <Sparkles className="h-3.5 w-3.5 tech-icon-glow" />
-                  AI-Powered Analysis
+        <main className="px-4 py-6">
+          {!analysis && !progress && (
+            <div className="max-w-4xl mx-auto animate-fade-in">
+              <section className="text-center py-8 space-y-6 gradient-hero rounded-2xl px-4 py-8 md:px-8 md:py-12">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <div className="h-px w-8 accent-line"></div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium code-badge">
+                    <Sparkles className="h-3.5 w-3.5 tech-icon-glow" />
+                    AI-Powered Analysis
+                  </div>
+                  <div className="h-px w-8 accent-line"></div>
                 </div>
-                <div className="h-px w-8 accent-line"></div>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-slide-up leading-tight">
-                Understand any GitHub repo
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-slide-up" style={{ animationDelay: "0.1s" }}>in seconds</span>
-              </h1>
-              
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono text-sm">
-                <span className="text-primary">→</span> Paste a repository URL and get an intelligent summary of its purpose, 
-                technologies, architecture, and key insights — without reading every file.
-              </p>
 
-              <div className="pt-4">
-                {apiConfig ? (
-                  <RepositoryInput 
-                    onSubmit={handleAnalyze} 
-                    isLoading={analyzeMutation.isPending} 
-                  />
-                ) : (
-                  <div className="text-center text-muted-foreground">
-                    <p className="mb-4">Please configure your API key to get started</p>
-                    <Button onClick={() => setShowApiModal(true)}>
-                      Configure API
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </section>
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-slide-up leading-tight">
+                  Understand any GitHub repo
+                  <span className="block bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-slide-up" style={{ animationDelay: "0.1s" }}>in seconds</span>
+                </h1>
 
-            <section className="py-12">
-              <h2 className="text-2xl font-bold text-center mb-2">Powerful Features</h2>
-              <div className="h-px max-w-xs mx-auto mb-12 accent-line"></div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.1s" }}>
-                  <div className="p-3 rounded-lg bg-chart-1/15 w-fit mb-4 group-hover:bg-chart-1/25 transition-colors">
-                    <Layers3 className="h-5 w-5 text-chart-1 tech-icon-glow" />
-                  </div>
-                  <h3 className="font-semibold mb-2 code-badge inline-block">Repository Scanning</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                    Automatically fetches and maps the entire file structure, identifying key components and dependencies in milliseconds.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.2s" }}>
-                  <div className="p-3 rounded-lg bg-chart-2/15 w-fit mb-4 group-hover:bg-chart-2/25 transition-colors">
-                    <Brain className="h-5 w-5 text-chart-2 tech-icon-glow" />
-                  </div>
-                  <h3 className="font-semibold mb-2 code-badge inline-block">AI-Powered Insights</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                    Advanced Gemini AI analyzes code patterns, technologies, and architecture to provide meaningful insights.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.3s" }}>
-                  <div className="p-3 rounded-lg bg-chart-3/15 w-fit mb-4 group-hover:bg-chart-3/25 transition-colors">
-                    <Cpu className="h-5 w-5 text-chart-3 tech-icon-glow" />
-                  </div>
-                  <h3 className="font-semibold mb-2 code-badge inline-block">Tech Stack Detection</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                    Intelligently identifies frameworks, libraries, and tools with categorized technology badges.
-                  </p>
-                </div>
-              </div>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono text-sm">
+                  <span className="text-primary">→</span> Paste a repository URL and get an intelligent summary of its purpose,
+                  technologies, architecture, and key insights — without reading every file.
+                </p>
 
-              <div className="mt-12 pt-8 border-t border-border/50">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
-                    <Database className="h-6 w-6 text-chart-4 mb-2" />
-                    <span className="text-xs font-mono text-muted-foreground uppercase">File Analysis</span>
+                <div className="pt-4">
+                  {apiConfig ? (
+                    <RepositoryInput
+                      onSubmit={handleAnalyze}
+                      isLoading={analyzeMutation.isPending}
+                    />
+                  ) : (
+                    <div className="text-center text-muted-foreground">
+                      <p className="mb-4">Please configure your API key to get started</p>
+                      <Button onClick={() => setShowApiModal(true)}>
+                        Configure API
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </section>
+
+              <section className="py-12">
+                <h2 className="text-2xl font-bold text-center mb-2">Powerful Features</h2>
+                <div className="h-px max-w-xs mx-auto mb-12 accent-line"></div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.1s" }}>
+                    <div className="p-3 rounded-lg bg-chart-1/15 w-fit mb-4 group-hover:bg-chart-1/25 transition-colors">
+                      <Layers3 className="h-5 w-5 text-chart-1 tech-icon-glow" />
+                    </div>
+                    <h3 className="font-semibold mb-2 code-badge inline-block">Repository Scanning</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                      Automatically fetches and maps the entire file structure, identifying key components and dependencies in milliseconds.
+                    </p>
                   </div>
-                  <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
-                    <Gauge className="h-6 w-6 text-chart-5 mb-2" />
-                    <span className="text-xs font-mono text-muted-foreground uppercase">Performance</span>
+
+                  <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.2s" }}>
+                    <div className="p-3 rounded-lg bg-chart-2/15 w-fit mb-4 group-hover:bg-chart-2/25 transition-colors">
+                      <Brain className="h-5 w-5 text-chart-2 tech-icon-glow" />
+                    </div>
+                    <h3 className="font-semibold mb-2 code-badge inline-block">AI-Powered Insights</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                      Advanced Gemini AI analyzes code patterns, technologies, and architecture to provide meaningful insights.
+                    </p>
                   </div>
-                  <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
-                    <GitFork className="h-6 w-6 text-chart-1 mb-2" />
-                    <span className="text-xs font-mono text-muted-foreground uppercase">Dependencies</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
-                    <Code2 className="h-6 w-6 text-chart-2 mb-2" />
-                    <span className="text-xs font-mono text-muted-foreground uppercase">Code Quality</span>
+
+                  <div className="p-6 rounded-xl glow-card hover-elevate transition-all animate-scale-in group" style={{ animationDelay: "0.3s" }}>
+                    <div className="p-3 rounded-lg bg-chart-3/15 w-fit mb-4 group-hover:bg-chart-3/25 transition-colors">
+                      <Cpu className="h-5 w-5 text-chart-3 tech-icon-glow" />
+                    </div>
+                    <h3 className="font-semibold mb-2 code-badge inline-block">Tech Stack Detection</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                      Intelligently identifies frameworks, libraries, and tools with categorized technology badges.
+                    </p>
                   </div>
                 </div>
-              </div>
-            </section>
-          </div>
-        )}
 
-        {progress && !analysis && (
-          <div className="py-12">
-            <AnalysisProgress progress={progress} />
-          </div>
-        )}
-
-        {analysis && (
-          <div className="py-6 animate-fade-in">
-            <div className="max-w-6xl mx-auto mb-6 animate-slide-up">
-              <RepositoryInput 
-                onSubmit={handleAnalyze} 
-                isLoading={analyzeMutation.isPending} 
-              />
+                <div className="mt-12 pt-8 border-t border-border/50">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
+                      <Database className="h-6 w-6 text-chart-4 mb-2" />
+                      <span className="text-xs font-mono text-muted-foreground uppercase">File Analysis</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
+                      <Gauge className="h-6 w-6 text-chart-5 mb-2" />
+                      <span className="text-xs font-mono text-muted-foreground uppercase">Performance</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
+                      <GitFork className="h-6 w-6 text-chart-1 mb-2" />
+                      <span className="text-xs font-mono text-muted-foreground uppercase">Dependencies</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-lg bg-card/50 border border-border/30">
+                      <Code2 className="h-6 w-6 text-chart-2 mb-2" />
+                      <span className="text-xs font-mono text-muted-foreground uppercase">Code Quality</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
-            <AnalysisResults analysis={analysis} />
-          </div>
-        )}
-      </main>
+          )}
+
+          {progress && !analysis && (
+            <div className="py-12">
+              <AnalysisProgress progress={progress} />
+            </div>
+          )}
+
+          {analysis && (
+            <div className="py-6 animate-fade-in">
+              <div className="max-w-6xl mx-auto mb-6 animate-slide-up">
+                <RepositoryInput
+                  onSubmit={handleAnalyze}
+                  isLoading={analyzeMutation.isPending}
+                />
+              </div>
+              <AnalysisResults analysis={analysis} />
+            </div>
+          )}
+        </main>
 
       </div>
       <footer className="border-t py-6 mt-12 relative z-10">
