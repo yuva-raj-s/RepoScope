@@ -30,6 +30,11 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      // Explicitly set the input entry point. Since the `root` is 'client',
+      // this resolves to `client/index.html`.
+      input: path.resolve(import.meta.dirname, "client", "index.html"),
+    },
   },
   server: {
     fs: {
