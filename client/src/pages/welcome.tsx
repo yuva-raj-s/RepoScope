@@ -1,6 +1,5 @@
 import { Code2, Sparkles, GitBranch, Cpu, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 interface WelcomeProps {
   onGetStarted: () => void;
@@ -9,18 +8,6 @@ interface WelcomeProps {
 export function Welcome({ onGetStarted }: WelcomeProps) {
   return (
     <div className="min-h-screen bg-background gradient-light-bulb flex flex-col">
-      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-primary/10">
-              <Code2 className="h-5 w-5 text-primary" />
-            </div>
-            <span className="font-semibold text-lg">RepoScope</span>
-          </div>
-          <ThemeToggle />
-        </div>
-      </header>
-
       <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10 overflow-y-auto">
         <div className="max-w-2xl w-full">
           {/* Hero Section */}
