@@ -1,25 +1,12 @@
 {
-  "env": {
-    "NODE_ENV": "production"
-  },
   "builds": [
     {
-      "src": "server/index.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build"
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
     }
   ],
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/server/index.ts"
-    },
-    {
-      "source": "/((?!api/|assets/).*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/dist/index.cjs" }
   ]
 }
