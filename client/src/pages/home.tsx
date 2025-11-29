@@ -321,13 +321,6 @@ export default function Home() {
           )}
         </main>
 
-      <footer className="border-t py-4 relative z-10 bg-background">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground gap-2">
-          <div className="flex items-center gap-2">
-            <a href="https://github.com/yuva-raj-s/RepoScope" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-foreground transition-colors">
-              <Github className="h-4 w-4" />
-              <span className="font-mono text-xs">yuva-raj-s/RepoScope</span>
-            </a>
       <footer className="relative z-10 mt-auto w-full">
         <div className="max-w-6xl mx-auto px-4">
           <div className="mt-16 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl border bg-background/50 p-6 text-sm text-muted-foreground shadow-sm backdrop-blur-sm">
@@ -343,12 +336,6 @@ export default function Home() {
               <span>by</span>
               <span className="font-semibold text-foreground">Yuvaraj</span>
             </div>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span>Made with</span>
-            <Heart className="h-4 w-4 text-red-500" />
-            <span>by</span>
-            <span className="font-semibold text-foreground">Yuvaraj</span>
           </div>
         </div>
       </footer>
